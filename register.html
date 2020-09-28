@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="style.css">
+
+    <title>Registration Form</title>`
+
+    <script>
+        $(document).ready(function(){
+            $("#username").keyup(function(){
+                var username = $("#username").val();
+                if (username == '') {
+                    $("#username").css("border","2px solid red");
+                    $("#errorMessage-user").html("<p class='text-danger'>Invalid </p> ");
+                } else {
+                    $("#username").css("border","2px solid green");
+                    $("#errorMessage-user").html("<p class='text-success'>Valid </p> ");
+                }
+            }); 
+
+            $("#email").keyup(function(){
+                if(validEmail()){
+                    $("#email").css("border","2px solid green");
+                    $("#errorMessage-email").html("<p class='text-success'>Valid </p> ");
+                }
+                else{
+                    $("#email").css("border","2px solid red");
+                    $("#errorMessage-email").html("<p class='text-danger'>Invalid </p> ");
+                }
+            });
+            $("#password").keyup(function(){
+                var password = $("#password").val();
+                if (password !== '') {
+                    $("#password").css("border","2px solid green");
+                    $("#errorMessage-pass").html("<p class='text-success'>Invalid </p> ");
+                } else {
+                    $("#password").css("border","2px solid red");
+                    $("#errorMessage-pass").html("<p class='text-danger'>Invalid </p> ");
+                }
+            });
+            $("#confirm-password").keyup(function(){
+                var pass = $("#password").val();
+                var pass2 = $("#confirm-password").val();
+                if (pass2 == pass) {
+                    $("#confirm-password").css("border","2px solid green");
+                    $("#errorMessage-conf").html("<p class='text-success'>Invalid </p> ");
+                } else {
+                    $("#confirm-password").css("border","2px solid red");
+                    $("#errorMessage-conf").html("<p class='text-danger'>Invalid </p> ");
+                }
+            });
+            $("#btn").click(function(){
+                buttonCheck();
+            });
+        });
+
+        function validEmail(){
+            var email = $("#email").val();
+            var reg = /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/
+            if (reg.test(email)) {
+                return true;
+            } else {
+                return false;
+            }
+        };
+        function buttonCheck(){
+            let user = $("#username").val();
+            let email = $("#email").val();
+            let pass = $("#password").val();
+            let pass2 = $("#confirm-password").val();
+
+            alert(user+" - "+email+" - "+pass+ " - "+pass2);
+        }
+        
+        
+    </script>
+
+</head>
+
+<body>
+    <div class="backG container-fluid" >
+        <div class="row justify-content-center">
+            <div class="col-xs-12 col-sm-4 col-md-4">
+                <form class="form-container">
+                    <div style="padding-bottom: 40px;">
+                        <h1 style="text-align: center">Registration Form</h1>
+                    </div>
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input class="form-control" type="text" id="username" placeholder="Enter Username">
+                        <span id="errorMessage-user"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input class="form-control" type="email" id="email" placeholder="Enter Email">
+                        <span id="errorMessage-email"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input class="form-control" type="password" id="password" placeholder="Enter Password">
+                        <span id="errorMessage-pass"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirm-password">Confirm Password</label>
+                        <input class="form-control" type="password" id="confirm-password" placeholder="Confirm Password">
+                        <span id="errorMessage-conf"></span>
+                    </div>
+                    <div>
+                        <input type="checkbox" name="" id="checkme">
+                        <label for="checkme">I accept the Terms of Use & Privacy Policy</label>
+                    </div>
+                    <br>
+                    <div>
+                        <button id="btn" class="btn btn-primary btn-block" type="submit">Register Now</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
